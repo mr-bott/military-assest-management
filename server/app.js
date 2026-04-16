@@ -8,37 +8,15 @@ dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 const app = express();
 
+app.use(express.json());
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
-const allowedOrigins = [
-  FRONTEND_URL,
-  
-];
-
-
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    // allow Postman / mobile apps / server calls
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    return callback(new Error("CORS Not Allowed"));
-  },
-
+app.use(cors({
+  origin: FRONTEND_URL,
   credentials: true,
-
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-
   allowedHeaders: ["Content-Type", "Authorization"],
-};
-
-app.use(cors(corsOptions));
-
-app.use(express.json());
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+}));
 
 mongoose
   .connect(process.env.MONGODB_URL)
