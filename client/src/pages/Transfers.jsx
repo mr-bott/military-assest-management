@@ -40,7 +40,7 @@ export default function Transfers() {
     ) {
       loadHistory();
     }
-  }, []);
+  }, [role]);
 
   const save = async () => {
     await axios.post(

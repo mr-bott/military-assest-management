@@ -43,7 +43,7 @@ export default function Assignments() {
     ) {
       loadHistory();
     }
-  }, []);
+  }, [role]);
 
   const save = async () => {
     await axios.post(

@@ -38,7 +38,7 @@ export default function Purchases() {
     ) {
       loadHistory();
     }
-  }, []);
+  }, [role]);
 
   const save = async () => {
     await axios.post(
